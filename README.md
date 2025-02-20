@@ -7,4 +7,4 @@ NOTE: Ubuntu Noble (24.04) is the recomended ubuntu version for this settup. You
 - Download the file to your Ubuntu Desktop.
 - open a terminal and cd to your file by using 'cd /path/to/your/script'.
 - cmod the file: 'chmod +x your/path/to/setup.sh'.
-- run the script: 'sudo your/path/to/setup.sh'
+- run the script: 'sudo HOME=$HOME your/path/to/setup.sh'
