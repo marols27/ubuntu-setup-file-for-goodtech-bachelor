@@ -20,19 +20,19 @@ apt upgrade -y
 apt install ros-jazzy-desktop -y
 apt install ros-jazzy-ros-base -y
 
+# Make ros2 usable in the terminal on open by "sorce-ing"
 # Replace ".bash" with your shell if you're not using bash
 # Possible values are: setup.bash, setup.sh, setup.zsh
-source /opt/ros/jazzy/setup.bash
-
+if ! grep -Fxq "source /opt/ros/jazzy/setup.bash" "$HOME/.bashrc"; then
+    echo "source /opt/ros/jazzy/setup.bash" >> "$HOME/.bashrc"
+fi
 
 
 # Gazebo setup:
-apt install ros-${ROS_DISTRO}-ros-gz -y
+apt install ros-jazzy-ros-gz -y
 
 echo 'export LIBGL_ALWAYS_SOFTWARE=1' >> ~/.bashrc
 echo 'export QT_QPA_PLATFORM=xcb' >> ~/.bashrc
-source ~/.bashrc
-
 
 
 # Setup the ros2 workspace
@@ -44,7 +44,7 @@ cd ..
 rosdep init
 rosdep update
 rosdep install -i --from-path src --rosdistro jazzy -y
-source /opt/ros/jazzy/setup.bash
+source ~/.bashrc
 
 
 
@@ -54,6 +54,10 @@ git clone -b ros2 https://github.com/UniversalRobots/Universal_Robots_ROS2_GZ_Si
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 cd ..
-colcon build --symlink-install
-source ~/ros2_ws/install/setup.bash
+colcon build
+source ~/.bashrc
 
+apt install ros-jazzy-ur -y
+
+
+echo "please run 'source ~/.bashrc' or open a new terminal to apply changes."
