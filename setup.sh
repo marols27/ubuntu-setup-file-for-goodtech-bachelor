@@ -3,12 +3,12 @@ set -x
 
 
 # Ros2 setup:
-locale  # check for UTF-8
 apt update && apt install locales
 locale-gen en_US en_US.UTF-8
 update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
 locale  # verify settings
+
 apt install software-properties-common -y
 add-apt-repository universe -y
 apt update && apt install curl gnupg2 lsb-release -y
@@ -54,7 +54,6 @@ git clone -b ros2 https://github.com/UniversalRobots/Universal_Robots_ROS2_GZ_Si
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 cd ..
-colcon build
 source ~/.bashrc
 
 apt install ros-jazzy-ur -y
