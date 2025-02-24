@@ -2,6 +2,8 @@ name: Check installation steps
 
 on:
   workflow_dispatch:
+  push:
+    branches: main
 
 jobs:
   install:
