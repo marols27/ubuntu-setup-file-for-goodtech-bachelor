@@ -2,6 +2,8 @@ name: Check installation steps
 
 on:
   workflow_dispatch:
+  push:
+    branches: main
 
 jobs:
   install:
@@ -15,4 +17,4 @@ jobs:
 
       - name: Run setup.sh
         run: |
-          ./setup.sh
+          sudo ./setup.sh
