@@ -31,6 +31,18 @@ sudo apt install ros-jazzy-ros-base -y
 echo "ROS2 setup done"
 
 
+# Setup the ros2 workspace:
+echo "Creating ROS2 workspace at $HOME/ros2_ws..."
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+git clone https://github.com/ros/ros_tutorials.git -b jazzy
+cd ..
+rosdep init
+rosdep update
+rosdep install -i --from-path src --rosdistro jazzy -y
+echo "ROS2 workspace created"
+
+
 # ROS2 source setup:
 # Replace ".bash" with your shell if you're not using bash
 # Possible values are: setup.bash, setup.sh, setup.zsh
@@ -48,18 +60,6 @@ sudo apt install ros-jazzy-ros-gz -y
 echo 'export LIBGL_ALWAYS_SOFTWARE=1' >> ~/.bashrc
 echo 'export QT_QPA_PLATFORM=xcb' >> ~/.bashrc
 echo "Gazebo instaled"
-
-
-# Setup the ros2 workspace:
-echo "Creating ROS2 workspace at $HOME/ros2_ws..."
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src
-git clone https://github.com/ros/ros_tutorials.git -b jazzy
-cd ..
-rosdep init
-rosdep update
-rosdep install -i --from-path src --rosdistro jazzy -y
-echo "ROS2 workspace created"
 
 
 # Universal Robot package download:
