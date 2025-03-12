@@ -67,7 +67,7 @@ echo "Setting up UR robot package..."
 cd ~/ros2_ws/src
 git clone -b ros2 https://github.com/UniversalRobots/Universal_Robots_ROS2_GZ_Simulation.git ~/ros2_ws/src/ur_simulation_gz
 rosdep update
-rosdep install --from-paths src --ignore-src -r -y
+rosdep install --from-paths . --ignore-src -r -y
 cd ..
 echo "UR robot package setup done"
 
