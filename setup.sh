@@ -5,7 +5,7 @@ set -x
 echo "seting up locales..."
 locale
 apt update
-apt install locales
+apt install locales -y
 locale-gen en_US en_US.UTF-8
 update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -31,6 +31,18 @@ apt install ros-jazzy-ros-base -y
 echo "ROS2 setup done"
 
 
+# Setup the ros2 workspace:
+echo "Creating ROS2 workspace at $HOME/ros2_ws..."
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+git clone https://github.com/ros/ros_tutorials.git -b jazzy
+cd ..
+rosdep init
+rosdep update
+rosdep install -i --from-path src --rosdistro jazzy -y
+echo "ROS2 workspace created"
+
+
 # ROS2 source setup:
 # Replace ".bash" with your shell if you're not using bash
 # Possible values are: setup.bash, setup.sh, setup.zsh
@@ -50,24 +62,12 @@ echo 'export QT_QPA_PLATFORM=xcb' >> ~/.bashrc
 echo "Gazebo instaled"
 
 
-# Setup the ros2 workspace:
-echo "Creating ROS2 workspace at $HOME/ros2_ws..."
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src
-git clone https://github.com/ros/ros_tutorials.git -b jazzy
-cd ..
-rosdep init
-rosdep update
-rosdep install -i --from-path src --rosdistro jazzy -y
-echo "ROS2 workspace created"
-
-
 # Universal Robot package download:
 echo "Setting up UR robot package..."
 cd ~/ros2_ws/src
 git clone -b ros2 https://github.com/UniversalRobots/Universal_Robots_ROS2_GZ_Simulation.git ~/ros2_ws/src/ur_simulation_gz
 rosdep update
-rosdep install --from-paths src --ignore-src -r -y
+rosdep install --from-paths . --ignore-src -r -y
 cd ..
 echo "UR robot package setup done"
 
