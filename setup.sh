@@ -47,8 +47,8 @@ echo "ROS2 workspace created"
 # Replace ".bash" with your shell if you're not using bash
 # Possible values are: setup.bash, setup.sh, setup.zsh
 echo "Source setup..."
-if ! grep -Fxq "source /opt/ros/jazzy/setup.bash" "$HOME/.bashrc"; then
-    echo "source /opt/ros/jazzy/setup.bash" >> "$HOME/.bashrc"
+if ! grep -Fxq "source $HOME/ros2_ws/install/setup.sh" "$HOME/.bashrc"; then
+    echo "source $HOME/ros2_ws/install/setup.sh" >> "$HOME/.bashrc"
 fi
 source ~/.bashrc
 echo "Source setup done"
